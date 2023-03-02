@@ -7,11 +7,14 @@ import AddFoodForm from "./components/AddFoodForm.jsx"
 import Search from "./components/Search.jsx"
 import { Row, Divider, Button } from 'antd';
 
+
+//Para hacer map hay que setear el food este i no el JSON, xrq no se modifica
+
 function App() {
   const [foods, setFoods] = useState(FoodsJSON);
 
-  const deleteHandler = (idFood) => {
-    setFoods(foods.filter(food => food.name !== idFood)); //
+  const deleteHandler = (foodName) => {
+    setFoods(foods.filter(food => food.name !== foodName)); //
   }
 
   const createFood = (food) => {
@@ -34,7 +37,7 @@ function App() {
       <Divider>Food List</Divider>
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {FoodsJSON.map(food => <FoodBox name={food.name} calories={food.calories} image={food.image} servings={food.servings} deleteHandler={deleteHandler} key={food.name} />)}
+        {foods.map(food => <FoodBox name={food.name} calories={food.calories} image={food.image} servings={food.servings} deleteHandler={() => deleteHandler(food.name)} key={food.name} />)}
       </Row>
     </div>
 
